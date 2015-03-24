@@ -27,7 +27,7 @@ sub new {
 			my $stream;
 			open($stream, "<", $ficheiro);
 			while(<$stream>){
-				le($.,$dicionario);
+				lepalavra($.,$dicionario);
 			};
 		}
 		else {print "Erro: Formato desconhecido em ",$ficheiro,"\n";}
@@ -36,19 +36,17 @@ sub new {
 	return bless {dicionario =>$dicionario},$class;
 }
 
-sub le{
+sub lepalavra{
 	my ($palavra,$dic2)=@_;
-	my @letras=split /./ $palavra;
+	my @letras=split /./, $palavra;
 	foreach my $letra (@letras){
-		if(not exists $letra,%$dic2){
-			$dic2->{$letra}={};
-		}
+		if($dic2->{$letra} //= {}){}
 		$dic2=values $letra, %$dic2;
 	}
 }
 
 sub print{
-	my $dic=$_;
-	print Dumper($dic);
+	my ($self)=@_;
+	print Dumper($self->{dicionario});
 }
 1;
