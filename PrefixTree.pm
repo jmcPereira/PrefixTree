@@ -27,7 +27,8 @@ sub new {
 			my $stream;
 			open($stream, "<", $ficheiro);
 			while(<$stream>){
-				lepalavra($.,$dicionario);
+				chomp;
+				lepalavra($_,$dicionario);
 			};
 		}
 		else {print "Erro: Formato desconhecido em ",$ficheiro,"\n";}
@@ -38,15 +39,19 @@ sub new {
 
 sub lepalavra{
 	my ($palavra,$dic2)=@_;
-	my @letras=split /./, $palavra;
+	my @letras=split //, $palavra;
 	foreach my $letra (@letras){
-		if($dic2->{$letra} //= {}){}
-		$dic2=values $letra, %$dic2;
+		if(not exists $dic2->{$letra}){
+			$dic2->{$letra}={};
+			}
+		$dic2=$dic2->{$letra};
 	}
 }
 
 sub print{
 	my ($self)=@_;
-	print Dumper($self->{dicionario});
+	my $href=$self->{dicionario};
+	print Dumper($href);
+	delete $href->{$_};
 }
 1;
