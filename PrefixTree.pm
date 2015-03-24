@@ -2,7 +2,7 @@ package PrefixTree;
 use strict;
 use Exporter;
 use IO::Uncompress::Gunzip qw(gunzip $GunzipError) ;
-use IO::Uncompress::Bunzip2 qw(bunzip2);
+use IO::Uncompress::Bunzip2 qw(bunzip2 $Bunzip2Error);
 use Data::Dumper;
 our @ISA=qw(Exporter);
 our @EXPORT=qw();
@@ -17,27 +17,22 @@ sub new {
 		my ($ext) = $ficheiro =~ /\.([^.]+)$/;
 		if ($ext eq "gz"){
 			print "A descompactar ",$ficheiro,"...\n";
-			my $fh = IO::Uncompress::Gunzip->new($ficheiro);
-
-			# the file being read has Unix newlines
-			#local $/ = "\012";
-
-			# As an added bonus, the object works as a filehandle.
-			<$fh>;
-			<$fh>;
-			<$fh>;
+			my $fh = IO::Uncompress::Gunzip->new($ficheiro) 
+				or die "Erro ao descompactar ",$ficheiro," !!!\n\t-> ",$GunzipError;
 			while(<$fh>) {
 				chomp;
-				print $_,"\n";
+				$_ =~ s/^\s*(.*?)\s*$/$1/;
+				if($_ ne ""){lepalavra($_,$dicionario);}
 			}
 		}
 		elsif ($ext eq "bz2"){
 			print "A descompactar ",$ficheiro,"...\n";
-			my $descompactado_bz2=new IO::Uncompress::Bunzip2 $ficheiro;
-			while(<descompactado_bz2>){
+			my $fh=new IO::Uncompress::Bunzip2 $ficheiro 
+				or die "Erro ao descompactar ",$ficheiro," !!!\n\t-> ",$Bunzip2Error;
+			while(<$fh>){
 				chomp;
-				print;
-				lepalavra($_,$dicionario);
+				$_ =~ s/^\s*(.*?)\s*$/$1/;
+				if($_ ne ""){lepalavra($_,$dicionario);}
 			};
 		}
 		elsif ($ext eq "txt"){
@@ -46,10 +41,10 @@ sub new {
 			print "A ler ",$ficheiro," ...\n";
 			while(<$stream>){
 				chomp;
-				lepalavra($_,$dicionario);
+				if($_ ne ""){lepalavra($_,$dicionario);}
 			};
 		}
-		else {print "Erro: Formato desconhecido em ",$ficheiro,"\n";}
+		else {die "Erro: Formato desconhecido em ",$ficheiro,"\n";}
 		
 	}
 	return bless {dicionario =>$dicionario},$class;
