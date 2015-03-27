@@ -60,6 +60,7 @@ sub lepalavra{
 			}
 		$dic2=$dic2->{$letra};
 	}
+	$dic2->{"."}={};
 }
 
 sub print{
@@ -129,20 +130,24 @@ sub rem_word{
 	if($self->word_exists($palavra)==0){die "Palavra nao existe!";}
 	else{
 		my $dic2=$self->{dicionario};
-		my $dic_temp={};
-		my $temp_letra;
+		my $dic_temp=0;
 		my $count=0;
+		my $letra;
+		my $letra_temp="";
 		my @letras=split //, $palavra;
-		foreach my $letra (@letras){
-			$count=values %$dic2;
+		foreach $letra (@letras){
+			$count=values $dic2->{$letra};
+			if ($count>1){$dic_temp=0;$letra_temp="";}
 			print "COUNT: ",$count,"\n";
-			if($dic2->{$letra}={}){
-				$dic_temp=$dic2->{$letra};
-				$temp_letra=$letra;
+			if($count==1 and $letra_temp eq ""){
+				$dic_temp=$dic2;
+				$letra_temp=$letra;
+				print "Temporaria",$letra_temp,"\n";
 				}
-			delete $dic_temp->{$letra};
+			$dic2=$dic2->{$letra};
 		}
-		$dic_temp={};
+		if($dic_temp!=0){delete $dic_temp->{$letra_temp};}
+		else {delete $dic2->{"."};}
 	}
 	}
 
@@ -156,8 +161,21 @@ sub word_exists{
 			}
 		$dic2=$dic2->{$letra};
 	}
-	if(!values $dic2) {return 1;}
+	if(exists $dic2->{"."}) {return 1;}
 	else {return 0;}
+	}
+	
+sub prefix_exists{
+	my ($self,$prefixo)=@_;
+	my $dic2=$self->{dicionario};
+	my @letras=split //, $prefixo;
+	foreach my $letra (@letras){
+		if(not exists $dic2->{$letra}){
+			return 0;
+			}
+		$dic2=$dic2->{$letra};
+	}
+	return 1;
 	}
 	
 1;

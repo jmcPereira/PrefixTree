@@ -32,8 +32,27 @@ use PrefixTree;
 #elsif($res2==0){print "A palavra ol nao existe\n";}
 
 ####teste rem_word
-my $pt=PrefixTree->new("teste.txt");
-#$pt->rem_word("ol");
-$pt->print();
-$pt->rem_word("ola");
-$pt->print();
+#my $pt=PrefixTree->new("teste.txt");
+#$pt->print();
+#print "\nREMOVI A PALAVRA : lei!\n";
+#$pt->rem_word("lei");
+#$pt->print();
+#print "\nREMOVI A PALAVRA : oi!\n";
+#$pt->rem_word("oi");
+#$pt->print();
+#print "\nREMOVI A PALAVRA : leitura!\n";
+#$pt->rem_word("leitura");
+#$pt->print();
+#print "\nREMOVI A PALAVRA : olga!\n";
+#$pt->rem_word("olga");
+#$pt->print();
+#print "\nREMOVI A PALAVRA : ola!\n";
+#$pt->rem_word("ola");
+#$pt->print();
+
+####teste prefix_exists
+#my $pt=PrefixTree->new("teste.txt");
+#my $prefixo="oi";
+#my $res=$pt->prefix_exists($prefixo);
+#if($res==1){print "O prefixo $prefixo existe\n";}
+#elsif($res==0){print "O prefixo $prefixo nao existe\n";}
