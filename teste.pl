@@ -4,10 +4,10 @@ use PrefixTree;
 
 
 ####teste add_dict
-#my $pt=PrefixTree->new("teste.txt");
+my $pt=PrefixTree->new("teste.txt");
 #$pt->print();
-#$pt->add_dict("teste3.gz");
-#$pt->print();
+$pt->add_dict("teste3.gz");
+$pt->print();
 
 
 ####teste save /load

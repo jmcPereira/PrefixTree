@@ -138,11 +138,9 @@ sub rem_word{
 		foreach $letra (@letras){
 			$count=values $dic2->{$letra};
 			if ($count>1){$dic_temp=0;$letra_temp="";}
-			print "COUNT: ",$count,"\n";
 			if($count==1 and $letra_temp eq ""){
 				$dic_temp=$dic2;
 				$letra_temp=$letra;
-				print "Temporaria",$letra_temp,"\n";
 				}
 			$dic2=$dic2->{$letra};
 		}
@@ -177,5 +175,8 @@ sub prefix_exists{
 	}
 	return 1;
 	}
+
+sub get_words_with_prefix{
 	
+	}
 1;
