@@ -44,3 +44,6 @@ is_deeply($pt,$pt2,"SAVE/LOAD: PrefixTree foi guardada. PrefixTree foi carregada
 ok($pt->prefix_exists("o") == 1,"PREFIX_EXISTS: O prefixo o existe.");
 ok($pt->prefix_exists("leitura") == 1,"PREFIX_EXISTS: O prefixo leitura existe.");
 ok($pt->prefix_exists("leituras") == 0,"PREFIX_EXISTS: O prefixo leituras nao existe.");
+
+#testa get_words_with_prefix
+ok($pt->get_words_with_prefix("olg")==1,"GET_WORDS_WITH_PREFIX: Palavras com prefixo o.")

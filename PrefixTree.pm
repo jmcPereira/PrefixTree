@@ -177,6 +177,32 @@ sub prefix_exists{
 	}
 
 sub get_words_with_prefix{
+	my ($self,$prefixo)=@_;
+	my $dic=$self->{dicionario};
+	my @words;
+	if($self->prefix_exists($prefixo)==0){die "Prefixo nao existe!";}
+	else {
+		my @letras=split //,$prefixo;
+		foreach my $letra (@letras){$dic=$dic->{$letra};}
+		get_words_with_prefix_aux($prefixo,$dic,\@words);
+	}
+	print Dumper(@words);
+	return 1;
+	}
+	
+sub get_words_with_prefix_aux{
+	
+	my ($prefixo,$dic,$words)=@_;
+	my $word="";
+	
+	foreach my $ram (keys $dic){
+		if($ram eq "."){
+			push $words , $prefixo;
+		}
+		else{
+			get_words_with_prefix_aux($prefixo.$ram,$dic->{$ram},$words);
+		}
+	}
 	
 	}
 1;
