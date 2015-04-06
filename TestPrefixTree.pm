@@ -1,6 +1,6 @@
 use warnings;
 use strict;
-use Test::More tests =>20;
+use Test::More tests =>22;
 
 BEGIN { use_ok('PrefixTree');
 	}
@@ -46,4 +46,10 @@ ok($pt->prefix_exists("leitura") == 1,"PREFIX_EXISTS: O prefixo leitura existe."
 ok($pt->prefix_exists("leituras") == 0,"PREFIX_EXISTS: O prefixo leituras nao existe.");
 
 #testa get_words_with_prefix
-ok($pt->get_words_with_prefix("olg")==1,"GET_WORDS_WITH_PREFIX: Palavras com prefixo o.")
+my $words_with_prefix_o=['ola','olga','oi'];
+is_deeply($words_with_prefix_o,$pt->get_words_with_prefix("o"),"GET_WORDS_WITH_PREFIX: Palavras com prefixo o.");
+
+my $words_with_prefix_x=[];
+is_deeply($words_with_prefix_x,$pt->get_words_with_prefix("x"),"GET_WORDS_WITH_PREFIX: Palavras com prefixo x. Nao ha!");
+
+1;

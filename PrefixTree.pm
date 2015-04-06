@@ -180,14 +180,14 @@ sub get_words_with_prefix{
 	my ($self,$prefixo)=@_;
 	my $dic=$self->{dicionario};
 	my @words;
-	if($self->prefix_exists($prefixo)==0){die "Prefixo nao existe!";}
+	if($self->prefix_exists($prefixo)==0){return [];}
 	else {
 		my @letras=split //,$prefixo;
 		foreach my $letra (@letras){$dic=$dic->{$letra};}
 		get_words_with_prefix_aux($prefixo,$dic,\@words);
 	}
-	print Dumper(@words);
-	return 1;
+	Dumper(@words);
+	\@words;
 	}
 	
 sub get_words_with_prefix_aux{
