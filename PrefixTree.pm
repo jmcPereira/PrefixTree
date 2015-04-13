@@ -38,6 +38,7 @@ See Also   :
 
 sub new {
 	my($class, @ficheiros) = @_;
+<<<<<<< HEAD
         my $dicionario = {};
 	my $res = bless {dicionario => $dicionario};
 	$res->add_dict(@ficheiros);
@@ -106,6 +107,9 @@ See Also   :
 sub add_dict{
         my($self, @ficheiros) = @_;
         my $dicionario=$self->{dicionario};
+=======
+	my $dicionario={};
+>>>>>>> e79995e612ea2e8b5576c221108835fa362c7f6c
 	foreach my $ficheiro (@ficheiros){
                 my ($ext) = $ficheiro =~ /\.([^.]+)$/;
                 my $fh;
@@ -318,6 +322,7 @@ sub word_exists{
 		return 0;
 	}
 }
+<<<<<<< HEAD
 
 
 #################### main pod documentation begin ###################
@@ -374,4 +379,6 @@ perl(1).
 #################### main pod documentation end ###################
 
 
+=======
+>>>>>>> e79995e612ea2e8b5576c221108835fa362c7f6c
 1;
