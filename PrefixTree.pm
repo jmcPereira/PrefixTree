@@ -2,7 +2,6 @@
 use strict;
 use IO::Uncompress::Gunzip qw(gunzip $GunzipError) ;
 use IO::Uncompress::Bunzip2 qw(bunzip2 $Bunzip2Error);
-use Data::Dumper;
 use Storable;
 use Switch;
 
