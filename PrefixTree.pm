@@ -1,5 +1,6 @@
  package PrefixTree;
 use strict;
+use Data::Dumper;
 use IO::Uncompress::Gunzip qw(gunzip $GunzipError) ;
 use IO::Uncompress::Bunzip2 qw(bunzip2 $Bunzip2Error);
 use Storable;
