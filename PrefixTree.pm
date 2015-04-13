@@ -12,7 +12,6 @@ our @EXPORTER_OK=qw(print save load add_dict add_word rem_word get_words_with_pr
 sub new {
 	my($class, @ficheiros) = @_;
 	my $dicionario={};
-	
 	foreach my $ficheiro (@ficheiros){
 		my ($ext) = $ficheiro =~ /\.([^.]+)$/;
 		if ($ext eq "gz"){
