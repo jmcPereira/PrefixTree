@@ -9,6 +9,7 @@ use Switch;
 
 
 BEGIN {
+
     use Exporter ();
     use vars qw($VERSION @ISA @EXPORT @EXPORT_OK %EXPORT_TAGS);
     $VERSION     = '2.0';
